@@ -1,0 +1,22 @@
+Importations :
+
+Les modules et classes nécessaires sont importés au début du fichier. Cela inclut des éléments de Django REST framework, de Django lui-même et d'autres dépendances.
+
+#Fonction signup :
+Cette fonction est décorée avec @api_view(['POST']), ce qui signifie qu'elle répondra aux requêtes HTTP de type POST uniquement.
+Elle utilise un sérialiseur UserSerializer pour valider et créer un nouvel utilisateur à partir des données fournies dans la requête.
+Si le sérialiseur est valide, l'utilisateur est créé, son mot de passe est défini et un jeton (token) d'authentification est généré à l'aide du module TokenAuthentication de Django REST framework.
+Enfin, la fonction renvoie une réponse JSON contenant le jeton et les données de l'utilisateur nouvellement créé.
+
+#Fonction login :
+Cette fonction est également décorée avec @api_view(['POST']) et répond aux requêtes POST.
+Elle vérifie les informations de connexion fournies (nom d'utilisateur et mot de passe) en recherchant l'utilisateur correspondant dans la base de données Django.
+Si l'utilisateur est trouvé et que le mot de passe est correct, un jeton est renvoyé dans la réponse.
+
+#Fonction test_token :
+Cette fonction est décorée avec @authentication_classes([SessionAuthentication, TokenAuthentication]) et @permission_classes([IsAuthenticated]).
+ Cela signifie qu'elle nécessite une authentification par session ou un jeton valide pour être accessible, et l'utilisateur doit être authentifié (IsAuthenticated).
+Elle renvoie simplement une réponse "passed!" lorsque l'utilisateur est authentifié, ce qui peut être utilisé pour tester si l'authentification fonctionne correctement.
+Ce code semble mettre en place des fonctionnalités d'inscription, de connexion et de test d'authentification basées sur les jetons d'authentification de Django REST framework pour une application Django.
+ Il est important de noter que ce code ne traite pas tous les cas d'erreur possibles et ne suit pas nécessairement les meilleures pratiques de sécurité. 
+Il est donc recommandé de le personnaliser et de l'adapter en fonction des besoins spécifiques de votre application.
